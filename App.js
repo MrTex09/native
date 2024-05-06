@@ -1,14 +1,42 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { View, Button, Alert } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
+const HomeScreen = ({ navigation }) => {
+  const goToDetail = () => {
+    navigation.navigate('Detail');
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <Button title="Ir a Detalle" onPress={goToDetail} />
     </View>
   );
-}
+};
+
+const DetailScreen = () => {
+  return (
+    <View>
+      <Text>Detalle de la pantalla</Text>
+    </View>
+  );
+};
+
+const Stack = createStackNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Detail" component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
+
 
 const styles = StyleSheet.create({
   container: {
